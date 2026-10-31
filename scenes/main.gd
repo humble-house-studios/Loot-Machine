@@ -53,6 +53,8 @@ func _ready() -> void:
 		add_child(p)
 		_sfx[id] = p
 	_build_ui()
+	# Controller / arrow keys: a frame that moves between buttons, A presses.
+	add_child(preload("res://scenes/loot_pad.gd").new())
 	get_viewport().size_changed.connect(_on_resized)
 	_on_resized()
 	_show_title()
@@ -158,11 +160,14 @@ func _build_ui() -> void:
 	_token_button = _button("TOKEN\nSPIN", Color("#4cc9f0"), 20)
 	_token_button.custom_minimum_size = Vector2(200, 110)
 	_token_button.pressed.connect(_on_token_spin)
+	_token_button.set_meta("pad_button", JOY_BUTTON_Y)
 	buttons.add_child(_token_button)
 	_spin_button = _button("PULL", COLOR_RED, 40)
 	_spin_button.custom_minimum_size = Vector2(0, 110)
 	_spin_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_spin_button.pressed.connect(_on_spin)
+	_spin_button.set_meta("pad_button", JOY_BUTTON_X)
+	_spin_button.set_meta("pad_default", true)
 	buttons.add_child(_spin_button)
 
 	_overlay = ColorRect.new()
@@ -426,6 +431,8 @@ func _show_title() -> void:
 	var start := _button("INSERT COIN", COLOR_RED, 32)
 	start.custom_minimum_size.y = 120
 	start.pressed.connect(_new_run)
+	start.set_meta("pad_button", JOY_BUTTON_START)
+	start.set_meta("pad_default", true)
 	_overlay_box.add_child(start)
 	var prize := _button("PRIZE COUNTER", COLOR_GOLD, 24)
 	prize.pressed.connect(_show_prizes)
@@ -461,6 +468,7 @@ func _show_prizes() -> void:
 		_overlay_box.add_child(b)
 	var back := _button("BACK", COLOR_RED, 24)
 	back.pressed.connect(_show_title)
+	back.set_meta("pad_button", JOY_BUTTON_B)
 	_overlay_box.add_child(back)
 
 
@@ -530,6 +538,7 @@ func _show_fired() -> void:
 	_overlay_box.add_child(again)
 	var menu := _button("LOBBY", COLOR_GOLD, 22)
 	menu.pressed.connect(_show_title)
+	menu.set_meta("pad_button", JOY_BUTTON_B)
 	_overlay_box.add_child(menu)
 
 

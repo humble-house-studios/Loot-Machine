@@ -32,6 +32,9 @@ and handle git, builds and fixes yourself.
 - Balance: `godot --headless -s res://tools/tune.gd` after changing numbers.
 - Screenshots: `tools/screenshot.gd` under xvfb, check both orientations.
 - Art is drawn in code (pixel shapes in `LootSymbols.SHAPES`). No image generation.
+- Controller: `scenes/loot_pad.gd` (same as the comedy game's `pad_cursor.gd`):
+  D-pad moves a frame over the buttons, A presses, X pulls, Y token spin, B back.
+  Read the pad from events, never `Input` polling (the office shares one pad).
 - Sounds: `tools/make_audio.py` (stdlib only), re-run after editing.
 
 ## Publishing

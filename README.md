@@ -27,6 +27,7 @@ and pays out **office relics**, permanent power-ups for every game in the room.
 | Killin' in Comedy | Lucky Mic (+3 Heat), Wristwatch (+10 s), The Notebook (+1 card), Throat Lozenge (full mic) | 2 Comp Tokens per set cleared, +3 for headlining |
 | Phone Pong | Spare Battery (+1 heart), Desk Divider (shield), Long Ruler (Wide Paddle), Phoenix Mug (Phoenix Feather) | 1 Comp Token per stage cleared |
 | Proof Hand | Chalk Nub (+1 hand), Eraser (+1 discard), Lucky Infinity (+2 Mult), ready for when its runs are playable | |
+| Cube Desk | Speed Lube (hints cost 1 s instead of 2) | 1 Comp Token per solve from level 3, 3 for the record scramble |
 | Loot Machine | Spare Quarter (+1 spin a quarter), Petty Cash (+8 coins) | |
 | The office | Comfy Sneakers (walk faster) | |
 

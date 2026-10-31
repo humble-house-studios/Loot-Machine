@@ -12,6 +12,10 @@ extends RefCounted
 const TOKENS_PER_PONG_STAGE := 1
 const TOKENS_PER_COMEDY_SET := 2
 const TOKENS_PER_COMEDY_SHOW := 3
+## Cube Desk: a solve from this level up pays a token; the record scramble pays 3.
+const CUBE_MIN_LEVEL := 3
+const TOKENS_PER_CUBE_BOSS := 3
+const CUBE_BOSS := 9
 
 var relics: OfficeRelics
 ## What happened since the office last asked (for toasts): ["+1 TOKEN", ...].
@@ -47,6 +51,8 @@ func tick(game: String, node: Node) -> void:
 			tick_pong(node)
 		"comedy":
 			tick_comedy(node)
+		"cube":
+			tick_cube(node)
 
 
 # ---------------------------------------------------------------- Phone Pong
@@ -147,6 +153,35 @@ func _apply_comedy(battle: Object) -> void:
 		n += 1
 	if n > 0:
 		news.append("OFFICE RELICS: +%d ON STAGE" % n)
+
+
+# ---------------------------------------------------------------- Cube Desk
+
+var _cube_solves := -1
+
+
+## Cube Desk (humble-house-studios/rubix scenes/main.gd): solves, last_level,
+## hint_penalty. Sets the hint cost from Speed Lube; each new solve from level
+## 3 up pays a Comp Token (3 for the world record scramble).
+func tick_cube(main: Node) -> void:
+	if not _has_vars(main, ["solves", "last_level", "hint_penalty"]):
+		return
+	var solves: int = main.get("solves")
+	if _cube_solves < 0:
+		_cube_solves = solves
+		relics.reload()
+		main.set("hint_penalty", float(relics.effects("cube").hint_penalty))
+		return
+	if solves > _cube_solves:
+		_cube_solves = solves
+		var lvl: int = main.get("last_level")
+		relics.bump("cube_solves")
+		if lvl >= CUBE_BOSS:
+			_earn(TOKENS_PER_CUBE_BOSS, "RECORD SCRAMBLE")
+		elif lvl >= CUBE_MIN_LEVEL:
+			_earn(1, "CUBE LEVEL %d" % lvl)
+		relics.reload()
+		main.set("hint_penalty", float(relics.effects("cube").hint_penalty))
 
 
 # ---------------------------------------------------------------- helpers

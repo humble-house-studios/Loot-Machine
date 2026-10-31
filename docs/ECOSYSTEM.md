@@ -16,6 +16,7 @@ var fx := OfficeRelics.open().effects("pong")
 # pong:   {hearts, shields, levels: {"wide": 1}, relics: ["phoenix"]}
 # comedy: {heat, seconds, hand, full_mic}
 # proof:  {hands, discards, mult}
+# cube:   {hint_penalty}
 # loot:   {spins, coins}
 # office: {walk_speed}
 ```
@@ -30,6 +31,11 @@ Phone Pong and Killin' in Comedy don't need to change. The office calls
   pays 1 Comp Token.
 - **Comedy:** each new `_battle` gets +Heat, +seconds, +hand size (and a refill)
   and full mic. Each `_run.set_index` step pays 2 Comp Tokens, +3 when the run is complete.
+
+## Cube Desk
+The office ticks `OfficeLink.tick_cube` with Cube Desk's main node: it sets
+`hint_penalty` from Speed Lube and pays a Comp Token for each new solve from
+level 3 up (3 for the record scramble), read from `solves` / `last_level`.
 
 ## Proof Hand
 Proof Hand has no playable runs yet. When it does, either put it on an office

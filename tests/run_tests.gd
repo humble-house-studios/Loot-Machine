@@ -14,6 +14,9 @@ func _init() -> void:
 			continue
 		files += 1
 		var script: GDScript = load("res://tests/" + file)
+		if script == null or not script.can_instantiate():
+			failures.append("%s: failed to compile" % file)
+			continue
 		var suite: RefCounted = script.new()
 		for msg: String in suite.run():
 			failures.append("%s: %s" % [file, msg])

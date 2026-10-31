@@ -13,6 +13,7 @@ func run() -> Array[String]:
 	_effects()
 	_pong_link()
 	_comedy_link()
+	_cube_link()
 	DirAccess.remove_absolute(PATH)
 	return _fails
 
@@ -157,3 +158,33 @@ func _comedy_link() -> void:
 	_check(OfficeRelics.open(PATH).tokens == mini(tokens + 2, LootBalance.MAX_TOKENS), "a cleared set pays 2 tokens")
 	_check(main._battle.crowd_energy == 13.0, "next set gets relics too")
 	main.free()
+
+
+class FakeCube extends Node:
+	var solves := 0
+	var last_level := 0
+	var hint_penalty := 2.0
+
+
+func _cube_link() -> void:
+	var r := OfficeRelics.open(PATH)
+	r.grant("speed_lube")
+	r.tokens = 0
+	r.save()
+	var link := OfficeLink.new(PATH)
+	var cube := FakeCube.new()
+	link.tick_cube(cube)
+	_check(cube.hint_penalty == 1.0, "speed lube: hints cost 1 s")
+	cube.solves = 1
+	cube.last_level = 2
+	link.tick_cube(cube)
+	_check(OfficeRelics.open(PATH).tokens == 0, "easy levels pay nothing")
+	cube.solves = 2
+	cube.last_level = 5
+	link.tick_cube(cube)
+	_check(OfficeRelics.open(PATH).tokens == 1, "level 5 pays a token")
+	cube.solves = 3
+	cube.last_level = 9
+	link.tick_cube(cube)
+	_check(OfficeRelics.open(PATH).tokens == 4, "the record scramble pays 3")
+	cube.free()

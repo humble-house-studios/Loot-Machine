@@ -16,6 +16,7 @@ const GAMES := {
 	"pong": "PHONE PONG",
 	"proof": "PROOF HAND",
 	"loot": "LOOT MACHINE",
+	"cube": "CUBE DESK",
 	"office": "THE OFFICE",
 }
 
@@ -35,6 +36,8 @@ const ALL := {
 	"chalk": {"name": "CHALK NUB", "desc": "+1 hand every blind", "game": "proof", "price": 6},
 	"eraser": {"name": "ERASER", "desc": "+1 discard every blind", "game": "proof", "price": 6},
 	"lucky_inf": {"name": "LUCKY INFINITY", "desc": "+2 Mult on every hand", "game": "proof", "price": 8},
+	# Cube Desk
+	"speed_lube": {"name": "SPEED LUBE", "desc": "Cube hints cost 1 second, not 2", "game": "cube", "price": 6},
 	# The Loot Machine itself
 	"spare_quarter": {"name": "SPARE QUARTER", "desc": "+1 spin every quarter", "game": "loot", "price": 8},
 	"petty_cash": {"name": "PETTY CASH", "desc": "Machine runs start with +8 coins", "game": "loot", "price": 6},
@@ -45,6 +48,7 @@ const ORDER := [
 	"lucky_mic", "wristwatch", "notebook", "lozenge",
 	"battery", "divider", "ruler", "phoenix_mug",
 	"chalk", "eraser", "lucky_inf",
+	"speed_lube",
 	"spare_quarter", "petty_cash",
 	"sneakers",
 ]
@@ -54,6 +58,7 @@ const GAME_COLORS := {
 	"pong": Color("#4cc9f0"),
 	"proof": Color("#b388ff"),
 	"loot": Color("#ffd700"),
+	"cube": Color("#3ee6c1"),
 	"office": Color("#9be37a"),
 }
 
@@ -187,6 +192,8 @@ func effects(game: String) -> Dictionary:
 		"loot":
 			fx.spins = 1 if has("spare_quarter") else 0
 			fx.coins = 8 if has("petty_cash") else 0
+		"cube":
+			fx.hint_penalty = 1.0 if has("speed_lube") else 2.0
 		"office":
 			fx.walk_speed = 1.3 if has("sneakers") else 1.0
 	return fx

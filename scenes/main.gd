@@ -54,7 +54,9 @@ func _ready() -> void:
 		_sfx[id] = p
 	_build_ui()
 	# Controller / arrow keys: a frame that moves between buttons, A presses.
-	add_child(preload("res://scenes/loot_pad.gd").new())
+	var pad := preload("res://scenes/loot_pad.gd").new()
+	pad.guide = [["DPAD", "Move between buttons"], ["A", "Press"], ["X", "Pull the lever"], ["Y", "Token spin"], ["B", "Back"]]
+	add_child(pad)
 	get_viewport().size_changed.connect(_on_resized)
 	_on_resized()
 	_show_title()

@@ -14,7 +14,7 @@ and pays out **office relics**, permanent power-ups for every game in the room.
 - Rows of 3/4/5, full-reel stacks, diagonals, zig/zag Vs and a full-window
   jackpot all pay. Three **Pink Slips** anywhere = **Layoff**: that spin pays 0.
 - Four quarters. When a quarter's spins run out you must hold the **quota**
-  ($12, $28, $60, then $110 at the Annual Review, where slips land twice as often).
+  ($10, $20, $45, then $95 at the Annual Review, where slips land twice as often).
   Miss it and you're fired.
 - Between quarters the **Break Room** sells perks for this run only
   (Double Espresso, Axiom of Choice wilds, Overtime, Long Lines...).
@@ -26,7 +26,7 @@ and pays out **office relics**, permanent power-ups for every game in the room.
 |---|---|---|
 | Killin' in Comedy | Lucky Mic (+3 Heat), Wristwatch (+10 s), The Notebook (+1 card), Throat Lozenge (full mic) | 2 Comp Tokens per set cleared, +3 for headlining |
 | Phone Pong | Spare Battery (+1 heart), Desk Divider (shield), Long Ruler (Wide Paddle), Phoenix Mug (Phoenix Feather) | 1 Comp Token per stage cleared |
-| Proof Hand | Chalk Nub (+1 hand), Eraser (+1 discard), Lucky Infinity (+2 Mult), ready for when its runs are playable | |
+| Proof Hand | Chalk Nub (+1 Play), Eraser (+1 discard), Lucky Infinity (+2 Mult) | 1 Comp Token per blind proven, 2 per boss |
 | Cube Desk | Speed Lube (hints cost 1 s instead of 2) | 1 Comp Token per solve from level 3, 3 for the record scramble |
 | Loot Machine | Spare Quarter (+1 spin a quarter), Petty Cash (+8 coins) | |
 | The office | Comfy Sneakers (walk faster) | |

@@ -38,10 +38,10 @@ The office ticks `OfficeLink.tick_cube` with Cube Desk's main node: it sets
 level 3 up (3 for the record scramble), read from `solves` / `last_level`.
 
 ## Proof Hand
-Proof Hand has no playable runs yet. When it does, either put it on an office
-computer and add a `tick_proof` to `OfficeLink`, or read
-`OfficeRelics.open().effects("proof")` in its `Game` autoload at run start
-(+1 hand, +1 discard, +2 Mult).
+The office ticks `OfficeLink.tick_proof` with Proof Hand's main node: a new
+`run` (ProofRun) gets `bonus_plays` (Chalk Nub), `bonus_discards` (Eraser)
+and `bonus_mult` (Lucky Infinity); every blind proven pays a Comp Token, a
+boss pays 2. Keep those names in proof-hand.
 
 ## Adding a new game
 1. Add its relics to `OfficeRelics.ALL`/`ORDER` with a `game` id, plus an

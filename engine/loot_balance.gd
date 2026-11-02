@@ -9,7 +9,7 @@ const ROWS := 3
 ## A run is four quarters. Each quarter you get some spins; when they run out
 ## you must hold the quota, which is paid out of your coins. Miss it: fired.
 const QUARTERS := 4
-const QUOTAS := [12, 28, 60, 110]
+const QUOTAS := [10, 20, 45, 95]
 const SPINS_PER_QUARTER := 7
 const START_COINS := 4
 ## The last quarter is the Annual Review: Pink Slips show up this much more.

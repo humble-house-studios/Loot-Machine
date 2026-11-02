@@ -16,6 +16,9 @@ const TOKENS_PER_COMEDY_SHOW := 3
 const CUBE_MIN_LEVEL := 3
 const TOKENS_PER_CUBE_BOSS := 3
 const CUBE_BOSS := 9
+## Proof Hand: each blind proven pays a token; a boss pays 2.
+const TOKENS_PER_PROOF_BLIND := 1
+const TOKENS_PER_PROOF_BOSS := 2
 
 var relics: OfficeRelics
 ## What happened since the office last asked (for toasts): ["+1 TOKEN", ...].
@@ -53,6 +56,8 @@ func tick(game: String, node: Node) -> void:
 			tick_comedy(node)
 		"cube":
 			tick_cube(node)
+		"proof":
+			tick_proof(node)
 
 
 # ---------------------------------------------------------------- Phone Pong
@@ -182,6 +187,41 @@ func tick_cube(main: Node) -> void:
 			_earn(1, "CUBE LEVEL %d" % lvl)
 		relics.reload()
 		main.set("hint_penalty", float(relics.effects("cube").hint_penalty))
+
+
+# ---------------------------------------------------------------- Proof Hand
+
+var _proof_run: Object
+var _proof_step := 0
+
+
+## Proof Hand (humble-house-studios/proof-hand scripts/ui/main.gd): `run`
+## (ProofRun: ante, stage, won, bonus_plays, bonus_discards, bonus_mult).
+## A new run gets Chalk Nub / Eraser / Lucky Infinity; every blind proven
+## pays a Comp Token (a boss pays 2).
+func tick_proof(main: Node) -> void:
+	if not ("run" in main):
+		return
+	var run = main.get("run")
+	if run == null or not _has_vars(run, ["ante", "stage", "won", "bonus_plays", "bonus_discards", "bonus_mult"]):
+		return
+	var step: int = int(run.ante) * 3 + int(run.stage) + (1 if run.won else 0)
+	if run != _proof_run:
+		_proof_run = run
+		_proof_step = step
+		relics.reload()
+		var fx := relics.effects("proof")
+		run.bonus_plays = int(fx.hands)
+		run.bonus_discards = int(fx.discards)
+		run.bonus_mult = float(fx.mult)
+		var n: int = (1 if fx.hands else 0) + (1 if fx.discards else 0) + (1 if fx.mult else 0)
+		if n > 0:
+			news.append("OFFICE RELICS: +%d IN PROOF HAND" % n)
+		return
+	if step > _proof_step:
+		for s in range(_proof_step, step):
+			_earn(TOKENS_PER_PROOF_BOSS if s % 3 == 2 else TOKENS_PER_PROOF_BLIND, "PROOF BOSS" if s % 3 == 2 else "BLIND PROVEN")
+		_proof_step = step
 
 
 # ---------------------------------------------------------------- helpers
